@@ -13,6 +13,10 @@ import os
 
 LINE = "I promise to love you in sickness and in health, in airplane mode and in low-power mode, until a factory reset do us part."
 
+# Gate guard: the sealed scorer only accepts a single non-blank line of
+# 1 to 160 characters; fail loudly here instead of shipping an invalid entry.
+assert 1 <= len(LINE) <= 160 and "\n" not in LINE and LINE.strip(), "entry violates the gate"
+
 
 def main() -> None:
     os.makedirs("/output", exist_ok=True)
